@@ -60,9 +60,7 @@ func run() error {
 		os.Exit(0)
 	}
 
-	fileMass.Mass()
-
-	return nil
+	return fileMass.Mass()
 }
 
 func main() {
