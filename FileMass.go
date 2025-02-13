@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"sync"
 
-	"github.com/schollz/progressbar/v3"
+	progressBar "github.com/schollz/progressbar/v3"
 )
 
 // 随机生成指定范围内的文件内容
@@ -24,7 +24,7 @@ func generateRandomContent(minKB, maxKB int) string {
 }
 
 // 创建文件并写入随机内容
-func createFile(dirPath, fileName string, wg *sync.WaitGroup, bar *progressbar.ProgressBar) {
+func createFile(dirPath, fileName string, wg *sync.WaitGroup, bar *progressBar.ProgressBar) {
 	defer wg.Done()
 
 	// 确保目录存在
@@ -51,19 +51,19 @@ func createFile(dirPath, fileName string, wg *sync.WaitGroup, bar *progressbar.P
 	bar.Add(1)
 }
 
-func Mass() {
+func Mass() error {
 
 	// 输出根目录
 	baseDir := "./output"
 
 	// 创建进度条
 	totalFiles := 1000 * 100 // 1000 个目录，每个目录 100 个文件
-	bar := progressbar.NewOptions(totalFiles,
-		progressbar.OptionSetRenderBlankState(true),
-		progressbar.OptionSetWidth(50),
-		progressbar.OptionSetDescription("正在生成文件"),
-		progressbar.OptionSetPredictTime(true),
-		progressbar.OptionShowCount(),
+	bar := progressBar.NewOptions(totalFiles,
+		progressBar.OptionSetRenderBlankState(true),
+		progressBar.OptionSetWidth(50),
+		progressBar.OptionSetDescription("正在生成文件"),
+		progressBar.OptionSetPredictTime(true),
+		progressBar.OptionShowCount(),
 	)
 
 	// 使用 WaitGroup 来等待所有文件生成完毕
@@ -93,7 +93,9 @@ func Mass() {
 	wg.Wait()
 
 	// 关闭进度条
-	bar.Finish()
+	if err := bar.Finish(); err != nil {
+		return err
+	}
 
-	fmt.Println("目录和文件创建完成！")
+	return nil
 }
