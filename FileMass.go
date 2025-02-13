@@ -48,7 +48,7 @@ func createFile(dirPath, fileName string, wg *sync.WaitGroup, bar *progressBar.P
 	}
 
 	// 更新进度条
-	bar.Add(1)
+	_ = bar.Add(1)
 }
 
 func Mass() error {
