@@ -1,0 +1,15 @@
+{
+  "name": "@axetroy/filemass-linux-arm64",
+  "version": "0.1.0",
+  "description": "The Linux arm64 binary for FileMass",
+  "repository": "https://github.com/axetroy/FileMass",
+  "license": "Anti-996 License",
+  "private": false,
+  "preferUnplugged": true,
+  "engines": {
+    "node": ">=12"
+  },
+  "files": ["filemass"],
+  "os": ["linux"],
+  "cpu": ["arm64"]
+}

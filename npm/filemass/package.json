@@ -1,0 +1,28 @@
+{
+  "name": "@axetroy/filemass",
+  "version": "0.1.0",
+  "description": "File system naming style lint",
+  "main": "lib/index.js",
+  "author": "Axetroy <axetroy.dev@gmail.com>",
+  "license": "Anti-996",
+  "private": false,
+  "bin": "bin/filemass",
+  "files": [
+    "bin/filemass",
+    "lib/index.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "optionalDependencies": {
+    "@axetroy/filemass-darwin-amd64": "0.1.0",
+    "@axetroy/filemass-darwin-arm64": "0.1.0",
+    "@axetroy/filemass-linux-arm64": "0.1.0",
+    "@axetroy/filemass-linux-amd64": "0.1.0",
+    "@axetroy/filemass-freebsd-arm64": "0.1.0",
+    "@axetroy/filemass-freebsd-amd64": "0.1.0",
+    "@axetroy/filemass-openbsd-arm64": "0.1.0",
+    "@axetroy/filemass-openbsd-amd64": "0.1.0",
+    "@axetroy/filemass-windows-arm64": "0.1.0",
+    "@axetroy/filemass-windows-amd64": "0.1.0"
+  }
+}
