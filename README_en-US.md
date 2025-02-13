@@ -48,6 +48,31 @@ go install github.com/axetroy/FileMass/cmd/FileMass
 npm install @axetroy/FileMass -g
 ```
 
+### Usage
+
+```bash
+$ filemass --help
+FileMass - a powerful file generation tool used to create directory structures and various types of files
+
+USAGE:
+  filemass [OPTIONS]
+
+OPTIONS:
+  --help                Print help information
+  --version             Print version information
+  --concurrence         Set the number of concurrent tasks, default is 1
+  --output              Set the output directory
+  --depth               Set the depth of the directory, default is 1
+  --min-size            Set the minimum size(in KB) of the file, default is 1KB
+  --max-size            Set the maximum size(in KB) of the file, default is 1024KB
+  --dirs                Set the number of directories, default is 1
+  --files               Set the number of files in the directory, default is 1
+  --clean               Clean the output directory before generating files
+
+SOURCE CODE:
+  https://github.com/axetroy/FileMass
+```
+
 ### Open Source License
 
 The [Anti-996 License](LICENSE)

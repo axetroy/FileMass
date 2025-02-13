@@ -23,13 +23,14 @@ USAGE:
 OPTIONS:
   --help                Print help information
   --version             Print version information
-	--concurrence         Set the number of concurrent tasks
-	--output              Set the output directory
-	--depth								Set the depth of the directory
-	--min-size						Set the minimum size of the file
-	--max-size						Set the maximum size of the file
-	--dirs								Set the number of directories
-	--files								Set the number of files in the directory
+  --concurrence         Set the number of concurrent tasks, default is 1
+  --output              Set the output directory
+  --depth               Set the depth of the directory, default is 1
+  --min-size            Set the minimum size(in KB) of the file, default is 1KB
+  --max-size            Set the maximum size(in KB) of the file, default is 1024KB
+  --dirs                Set the number of directories, default is 1
+  --files               Set the number of files in the directory, default is 1
+  --clean               Clean the output directory before generating files
 
 SOURCE CODE:
   https://github.com/axetroy/FileMass`)
@@ -39,12 +40,26 @@ func run() error {
 	var (
 		showHelp    bool
 		showVersion bool
-		noColor     bool
+		concurrence int
+		output      string
+		depth       int
+		minSize     int
+		maxSize     int
+		dirs        int
+		files       int
+		clean       bool
 	)
 
-	flag.BoolVar(&noColor, "no-color", false, "disabled color for printing")
 	flag.BoolVar(&showHelp, "help", false, "Print help information")
 	flag.BoolVar(&showVersion, "version", false, "Print version information")
+	flag.IntVar(&concurrence, "concurrence", 1, "Set the number of concurrent tasks")
+	flag.StringVar(&output, "output", "", "Set the output directory")
+	flag.IntVar(&depth, "depth", 1, "Set the depth of the directory")
+	flag.IntVar(&minSize, "min-size", 1, "Set the minimum size of the file (in KB)")
+	flag.IntVar(&maxSize, "max-size", 1024, "Set the maximum size of the file (in KB)")
+	flag.IntVar(&dirs, "dirs", 1, "Set the number of directories")
+	flag.IntVar(&files, "files", 1, "Set the number of files in the directory")
+	flag.BoolVar(&clean, "clean", false, "Clean the output directory before generating files")
 
 	flag.Usage = printHelp
 
@@ -60,9 +75,22 @@ func run() error {
 		os.Exit(0)
 	}
 
-	fileMass.Mass()
+	if output == "" {
+		return fmt.Errorf("--output is required")
+	}
 
-	return nil
+	config := fileMass.Config{
+		Concurrence: concurrence,
+		Output:      output,
+		Depth:       depth,
+		MinSize:     minSize,
+		MaxSize:     maxSize,
+		Dirs:        dirs,
+		Files:       files,
+		Clean:       clean,
+	}
+
+	return fileMass.Mass(config)
 }
 
 func main() {

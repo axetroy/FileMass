@@ -4,6 +4,14 @@ const { exec } = require("../lib/index");
 
 const ps = exec(process.argv.slice(2), { stdio: "inherit" });
 
+// 转发信号到子进程
+const signals = ["SIGINT", "SIGTERM", "SIGHUP"];
+signals.forEach((signal) => {
+  process.on(signal, () => {
+    ps.kill(signal);
+  });
+});
+
 ps.on("exit", (code) => {
   process.exit(code);
 });

@@ -8,7 +8,7 @@ jobs:
     timeout-minutes: 30
     strategy:
       matrix:
-        go: ["^1.19"]
+        go: ["^1.24"]
         os: [ubuntu-latest, macOS-latest, windows-latest]
     name: Go ${{ matrix.go }} in ${{ matrix.os }}
     steps:
@@ -26,7 +26,7 @@ jobs:
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v3
         with:
-          version: v1.56.2
+          version: v1.64.4
           args: -v --timeout 5m0s
 
       - name: Format
@@ -37,12 +37,6 @@ jobs:
           make test
           go mod tidy
           git checkout ./
-
-      # - name: Build
-      #   uses: goreleaser/goreleaser-action@v2
-      #   with:
-      #     version: latest
-      #     args: release --rm-dist --skip-publish --skip-validate
 
   release:
     name: Release to Github
@@ -75,13 +69,15 @@ jobs:
       - name: Release to Github
         uses: goreleaser/goreleaser-action@v2
         with:
-          version: latest
+          version: 2.7.0
           args: release --clean --release-notes=./release.md
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Prepare npm package
-        run: node npm/prepare.js
+        run: |
+          ls dist
+          node npm/prepare.js
         env:
           GIT_REF: ${{ github.ref }}
 

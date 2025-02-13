@@ -1,7 +1,7 @@
 {
   "name": "@axetroy/filemass",
   "version": "0.1.0",
-  "description": "File system naming style lint",
+  "description": "A powerful file generation tool",
   "main": "lib/index.js",
   "author": "Axetroy <axetroy.dev@gmail.com>",
   "license": "Anti-996",
