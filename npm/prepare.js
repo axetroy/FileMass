@@ -73,10 +73,6 @@ for (const pkgName of packages) {
       throw new Error(`Can not found prebuild file: ${source}`);
     }
 
-    if (!fs.existsSync(dest)) {
-      throw new Error(`Can not found npm dest: ${dest}`);
-    }
-
     fs.copyFileSync(source, dest);
   } else {
     fs.copyFileSync(
